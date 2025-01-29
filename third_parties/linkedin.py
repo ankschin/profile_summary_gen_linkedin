@@ -9,7 +9,7 @@ def scrape_linkedin_profile(linkedin_profile_url:str, mock:bool=False):
 
     if mock==True:
         #linkedin_profile_url="https://gist.githubusercontent.com/ankschin/f85221530b93f020a8690115c42dc534/raw/1ae1a6a3996fb3cc44926df9fb46411d421fe003/eden_marco.json"
-        linkedin_profile_url="https://gist.githubusercontent.com/ankschin/1bb7f6dcf31fd0bdac45b857830ea95c/raw/bb1bcad7a58e97a59b5777e8b48f63e8a2e9a58d/sachin_kumar_linkedin.json"
+        linkedin_profile_url="https://gist.githubusercontent.com/ankschin/1bb7f6dcf31fd0bdac45b857830ea95c/raw/1a7489766999eefbc1be4188247b6e561e941e69/sachin_kumar_linkedin.json"
         response= requests.get(
             linkedin_profile_url,
             timeout=10,

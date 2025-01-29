@@ -1,3 +1,6 @@
 langchain
 langchain-community
 langchain-openai
+fastapi
+uvicorn
+jinja2
