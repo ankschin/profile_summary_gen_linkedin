@@ -41,7 +41,7 @@ def get_profile_with(name:str):
     result= chain.invoke(input={"info":linkedin_data})
 
     print(result)
-
+    print("done!!")
 
     
 
