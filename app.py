@@ -5,6 +5,7 @@ from langchain_openai import ChatOpenAI
 from third_parties.linkedin import scrape_linkedin_profile
 
 from agents.linkedin_lookup_agent import lookup as linkedin_lookup_agent
+from output_parser import summary_parser
 
 information="""
 Samuel Harris Altman (born April 22, 1985) is an American entrepreneur and investor best known as the chief executive officer of OpenAI since 2019 (he was briefly dismissed and reinstated in November 2023).[1] He is also the chairman of clean energy companies Oklo Inc. and Helion Energy.[2]
@@ -28,16 +29,18 @@ def get_profile_with(name:str):
         given the information {info} about a person, I want you to create:
         1. a short summary
         2. two interesting facts about them
+        \n{format_instructions}
         """
     
-    summary_prompt_template= PromptTemplate(input_variables=["info"], template=summary_template)
+    summary_prompt_template= PromptTemplate(input_variables=["info"], 
+                                            template=summary_template,
+                                            partial_variables={"format_instructions": summary_parser.get_format_instructions()})
 
     llm= ChatOpenAI(temperature=0, model_name="gpt-4o-mini")
 
-    chain= summary_prompt_template | llm 
+    chain= summary_prompt_template | llm | summary_parser 
 
     # result= chain.invoke(input={"info":information})
-
     result= chain.invoke(input={"info":linkedin_data})
 
     print(result)
