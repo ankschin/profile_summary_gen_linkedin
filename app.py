@@ -18,13 +18,11 @@ app = FastAPI(
     version="0.0.1"
 )
 
-
-templates = Jinja2Templates(directory="/templates")
-
-## for loading static html files
-app.mount('/get_profile_summary', StaticFiles(directory='templates', html=True))
-
 templates = Jinja2Templates(directory='templates')
+
+@app.get("/get_profile_summary")
+async def read_index():
+    return FileResponse('templates/index.html')
 
 @app.post("/process", status_code=200)
 async def generate_profile_summary(name: str=Form(...)):
